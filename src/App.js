@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import {useApplicationContext} from './AppContext';
 
 function App() {
+
+  const { state, dispatch } = useApplicationContext();
+
+  const incrementOnClickHandler = (e) => {
+    dispatch({type: 'increment', value: 1})
+  }
+
+  const decrementOnClickHandler = (e) => {
+    dispatch({type: 'decrement', value: 1})
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <label>{state.count}</label>
+      </div>
+      <div>
+        <button onClick={incrementOnClickHandler}>Increment</button>
+        <button onClick={decrementOnClickHandler}>Decrement</button>
+      </div>
     </div>
   );
 }
